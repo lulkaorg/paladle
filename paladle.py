@@ -4,6 +4,7 @@ import random
 from playsound import playsound
 import requests
 import tempfile
+import os
 
 def main():
     champions = ['androxus', 'maeve', 'ying']
@@ -167,12 +168,23 @@ def guess_vgs_keys():
 
 def guess_talent(champions):
     random_champion = random.choice(champions)
-    champ_file = open(f'talents/{random_champion}', 'r')
-    content = champ_file.read()
-    print(content)
-    champ_file.close()
+    random_champion_talents_dir = f'talents/{random_champion}'
 
+    # This basically opens the directory and gets all the names of the files in there
+    talent_files = [f for f in os.listdir(random_champion_talents_dir) if os.path.isfile(os.path.join(random_champion_talents_dir, f))]
 
+    # This selects a random file from the talent files
+    random_talent_file = random.choice(talent_files)
+
+    # This opens the randomly selected file and reads the contents
+    file_path = os.path.join(random_champion_talents_dir, random_talent_file)
+    with open(file_path, 'r') as file:
+        talent_desc = file.read()
+        print(talent_desc)
+
+    guess = input('Which talent does this description belong to? ')
+    while guess != random_talent_file:
+        guess = input('Wrong! Try again: ')
 
 if __name__ == '__main__':
     main()
