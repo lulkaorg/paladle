@@ -12,6 +12,7 @@ def main():
     guess_the_voiceline_sound(champions)
     guess_the_ability(champions)
     guess_vgs_keys()
+    guess_talent(champions)
 
 def guess_the_ult_voiceline_text(champions):
     random_champion = random.choice(champions)
@@ -79,10 +80,11 @@ def guess_the_voiceline_sound(champions):
 def guess_vgs_keys():
     answer = input('"legacy" VGS or "new" VGS? ')
 
-    if answer == 'legacy':
+    while answer == 'legacy':
         print('Coming soon! (Maybe)')
+        answer = input('"legacy" VGS or "new" VGS? ')
 
-    elif answer == 'new':
+    if answer == 'new':
         z_vvf1 = {'vvf1': "Flank left!"}
         z_vvf2 = {'vvf2': "Attack up the middle!"}
         z_vvf3 = {'vvf3': "Flank right!"}
@@ -161,6 +163,15 @@ def guess_vgs_keys():
 
         if guess in random_vgs_voice_line:
             print('Correct!\n')
+
+
+def guess_talent(champions):
+    random_champion = random.choice(champions)
+    champ_file = open(f'talents/{random_champion}', 'r')
+    content = champ_file.read()
+    print(content)
+    champ_file.close()
+
 
 
 if __name__ == '__main__':

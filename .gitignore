@@ -1,0 +1,58 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.xml
+*.cover
+.cache
+pytest_cache/
+
+# PyCharm specific
+.idea/
+!.idea/inspectionProfiles/
+!.idea/runConfigurations/
+!.idea/misc.xml
+!.idea/modules.xml
+
+# User-specific files to ignore
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries/
+.idea/dataSources/
+.idea/dataSources.ids
+.idea/sqlDataSources.xml
+.idea/assetWizard.xml
+.idea/webServers.xml
+
+# Environment variables and virtual environments
+.env
+.env.*
+.venv/
+venv/
+ENV/
+env/
+
+# Logs
+*.log
+
+# Local configuration files
+*.local
+
