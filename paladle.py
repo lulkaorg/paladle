@@ -2,8 +2,6 @@
 
 import random
 from playsound import playsound
-import requests
-import tempfile
 import os
 
 def main():
@@ -23,15 +21,17 @@ def guess_the_ult_voiceline_text(champions):
     champ_file.close()
 
     guess = input('Which champions ult voices lines are these? ')
-    wrong_guess = [0, 1, 2, 3, 4]
+    i = 0
     hint = random_champion[0]
 
     while guess != random_champion:
-        for i in wrong_guess:
-            print('Wrong!')
-            if i == 4:
-                print(f'Hint: The champions name starts with {hint}')
-            guess = input('Try again: ')
+        print('Wrong!')
+        if i == 4:
+            print(f'Hint: The champions name starts with {hint}')
+            i = 0
+        else:
+            i += 1
+        guess = input('Try again: ')
 
     if guess == random_champion:
         print('Correct!\n')
@@ -45,14 +45,17 @@ def guess_the_ability(champions):
     champ_file.close()
 
     guess = input('Which champion is this ability/weapon name from? ')
+    i = 0
     hint = random_champion[0]
 
     while guess != random_champion:
-        for i in range(0,3):
-            print('Wrong!')
-            if i == 4:
-                print(f'Hint: The champions name starts with {hint}')
-            guess = input('Try again: ')
+        print('Wrong!')
+        if i == 4:
+            print(f'Hint: The champions name starts with {hint}')
+            i = 0
+        else:
+            i += 1
+        guess = input('Try again: ')
 
     if guess == random_champion:
         print('Correct!\n')
@@ -64,16 +67,18 @@ def guess_the_voiceline_sound(champions):
     playsound(f'voicelines_audio/{random_champion}{random_voice_file}.ogg')
 
     guess = input('Which champion is this voice line from? ')
-    wrong_guess = [0, 1, 2, 3, 4]
+    i = 0
     hint = random_champion[0]
 
     while guess != random_champion:
-        for i in wrong_guess:
-            print('Wrong!')
-            if i == 4:
-                print(f'Hint: The champions name starts with {hint}')
-                playsound(f'voicelines_audio/{random_champion}{random_voice_file}.ogg')
-            guess = input('Try again: ')
+        print('Wrong!')
+        if i == 4:
+            print(f'Hint: The champions name starts with {hint}')
+            playsound(f'voicelines_audio/{random_champion}{random_voice_file}.ogg')
+            i = 0
+        else:
+            i += 1
+        guess = input('Try again: ')
 
     if guess == random_champion:
         print('Correct!\n')
@@ -158,9 +163,8 @@ def guess_vgs_keys():
 
         guess = input('What is the VGS hotkey combination for this VGS voice line? ')
 
-        if guess not in random_vgs_voice_line:
-            while guess not in random_vgs_voice_line:
-                guess = input('Wrong! Try again: ')
+        while guess not in random_vgs_voice_line:
+            guess = input('Wrong! Try again: ')
 
         if guess in random_vgs_voice_line:
             print('Correct!\n')
@@ -185,6 +189,10 @@ def guess_talent(champions):
     guess = input('Which talent does this description belong to? ')
     while guess != random_talent_file:
         guess = input('Wrong! Try again: ')
+
+    if guess == random_talent_file:
+        print('Correct!\n')
+
 
 if __name__ == '__main__':
     main()
