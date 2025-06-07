@@ -1,17 +1,19 @@
-#!/usr/bin/env python3
-
 import random
 from playsound import playsound
 import os
 
 def main():
-    champions = ['androxus', 'maeve', 'ying']
-    
+    champions = ['androxus', 'ash', 'atlas', 'azaan', 'barik', 'betty', 'bomb king', 'buck', 'caspian', 'cassie', 'corvus', 'dredge', 'drogoz', 'evie',
+                 'fernando', 'furia', 'grohk', 'grover', 'imani', 'inara', 'io', 'jenos', 'kasumi', 'khan', 'kinessa', 'koga', 'lex', 'lian', 'lillith',
+                 'maeve', 'makoa', "mal'damba", 'moji', 'nyx', 'octavia', 'omen', 'pip', 'raum', 'rei', 'ruckus', 'saati', 'seris', 'sha lin', 'skye', 'strix',
+                 'talus', 'terminus', 'tiberius', 'torvald', 'tyra', 'vii', 'vatu', 'viktor', 'vivian', 'vora', 'willo', 'yagorath', 'ying', 'zhin']
+
+
     guess_the_ult_voiceline_text(champions)
-    guess_the_voiceline_sound(champions)
-    guess_the_ability(champions)
-    guess_vgs_keys()
-    guess_talent(champions)
+    #guess_the_voiceline_sound(champions)
+    #guess_the_ability(champions)
+    #guess_vgs_keys()
+    #guess_talent(champions)
 
 def guess_the_ult_voiceline_text(champions):
     random_champion = random.choice(champions)
@@ -20,7 +22,7 @@ def guess_the_ult_voiceline_text(champions):
     print(content)
     champ_file.close()
 
-    guess = input('Which champions ult voices lines are these? ')
+    guess = input('Which champions ult voice lines are these? ')
     i = 0
     hint = random_champion[0]
 
