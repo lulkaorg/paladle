@@ -65,7 +65,7 @@ def guess_the_ability(champions):
 def guess_the_voiceline_sound(champions):
     #voice_files = ['_SP_Ability1_', '_SP_Ability2_', '_SP_Ability3_', '_SP_AbilityUltimate_', '_SP_Death_']
     #random_voice_file = random.choice(voice_files)
-    random_champion = 'Androxus' #random.choice(champions)
+    random_champion = random.choice(champions)
     all_voice_files = [f for f in os.listdir(f'voicelines_audio/{random_champion}') if os.path.isfile(os.path.join(f'voicelines_audio/{random_champion}', f))]
     random_voice_file = random.choice(all_voice_files)
     playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
