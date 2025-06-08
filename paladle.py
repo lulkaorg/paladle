@@ -12,7 +12,7 @@ def main():
     guess_the_ult_voiceline_text(champions)
     guess_the_voiceline_sound(champions)
     #guess_the_ability(champions)
-    #guess_vgs_keys()
+    guess_vgs_keys()
     #guess_talent(champions)
 
 def guess_the_ult_voiceline_text(champions):
