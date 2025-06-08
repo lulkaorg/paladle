@@ -1,16 +1,16 @@
 import random
-from playsound import playsound
 import os
+from betterplaysound import playsound
 
 def main():
-    champions = ['androxus', 'ash', 'atlas', 'azaan', 'barik', 'betty', 'bomb king', 'buck', 'caspian', 'cassie', 'corvus', 'dredge', 'drogoz', 'evie',
-                 'fernando', 'furia', 'grohk', 'grover', 'imani', 'inara', 'io', 'jenos', 'kasumi', 'khan', 'kinessa', 'koga', 'lex', 'lian', 'lillith',
-                 'maeve', 'makoa', "mal'damba", 'moji', 'nyx', 'octavia', 'omen', 'pip', 'raum', 'rei', 'ruckus', 'saati', 'seris', 'sha lin', 'skye', 'strix',
-                 'talus', 'terminus', 'tiberius', 'torvald', 'tyra', 'vii', 'vatu', 'viktor', 'vivian', 'vora', 'willo', 'yagorath', 'ying', 'zhin']
+    champions = ['Androxus', 'Ash', 'Atlas', 'Azaan', 'Barik', 'Betty', 'Bomb Bing', 'Buck', 'Caspian', 'Cassie', 'Corvus', 'Dredge', 'Drogoz', 'Evie',
+                 'Fernando', 'Furia', 'Grohk', 'Grover', 'Imani', 'Inara', 'Io', 'Jenos', 'Kasumi', 'Khan', 'Kinessa', 'Koga', 'Lex', 'Lian', 'Lillith',
+                 'Maeve', 'Makoa', "Mal'Damba", 'Moji', 'Nyx', 'Octavia', 'Omen', 'Pip', 'Raum', 'Rei', 'Ruckus', 'Saati', 'Seris', 'Sha Lin', 'Skye', 'Strix',
+                 'Talus', 'Terminus', 'Tiberius', 'Torvald', 'Tyra', 'VII', 'Vatu', 'Viktor', 'Vivian', 'Vora', 'Willo', 'Yagorath', 'Ying', 'Zhin']
 
 
     guess_the_ult_voiceline_text(champions)
-    #guess_the_voiceline_sound(champions)
+    guess_the_voiceline_sound(champions)
     #guess_the_ability(champions)
     #guess_vgs_keys()
     #guess_talent(champions)
@@ -63,10 +63,12 @@ def guess_the_ability(champions):
         print('Correct!\n')
 
 def guess_the_voiceline_sound(champions):
-    voice_files = ['_TR_FirstBlood', '_VGS_Other_G_M']
-    random_voice_file = random.choice(voice_files)
-    random_champion = random.choice(champions)
-    playsound(f'voicelines_audio/{random_champion}{random_voice_file}.ogg')
+    #voice_files = ['_SP_Ability1_', '_SP_Ability2_', '_SP_Ability3_', '_SP_AbilityUltimate_', '_SP_Death_']
+    #random_voice_file = random.choice(voice_files)
+    random_champion = 'Androxus' #random.choice(champions)
+    all_voice_files = [f for f in os.listdir(f'voicelines_audio/{random_champion}') if os.path.isfile(os.path.join(f'voicelines_audio/{random_champion}', f))]
+    random_voice_file = random.choice(all_voice_files)
+    playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
 
     guess = input('Which champion is this voice line from? ')
     i = 0
@@ -76,7 +78,7 @@ def guess_the_voiceline_sound(champions):
         print('Wrong!')
         if i == 4:
             print(f'Hint: The champions name starts with {hint}')
-            playsound(f'voicelines_audio/{random_champion}{random_voice_file}.ogg')
+            playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
             i = 0
         else:
             i += 1
