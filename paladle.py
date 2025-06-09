@@ -1,6 +1,8 @@
 import random
 import os
 from betterplaysound import playsound
+import requests
+import tempfile
 
 def main():
     champions = ['Androxus', 'Ash', 'Atlas', 'Azaan', 'Barik', 'Betty', 'Bomb Bing', 'Buck', 'Caspian', 'Cassie', 'Corvus', 'Dredge', 'Drogoz', 'Evie',
@@ -63,29 +65,35 @@ def guess_the_ability(champions):
         print('Correct!\n')
 
 def guess_the_voiceline_sound(champions):
-    #voice_files = ['_SP_Ability1_', '_SP_Ability2_', '_SP_Ability3_', '_SP_AbilityUltimate_', '_SP_Death_']
-    #random_voice_file = random.choice(voice_files)
-    random_champion = random.choice(champions)
-    all_voice_files = [f for f in os.listdir(f'voicelines_audio/{random_champion}') if os.path.isfile(os.path.join(f'voicelines_audio/{random_champion}', f))]
-    random_voice_file = random.choice(all_voice_files)
-    playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
+    on_or_off = int(input('Online(0) or Offline(1)? '))
 
-    guess = input('Which champion is this voice line from? ')
-    i = 0
-    hint = random_champion[0]
+    if on_or_off == 1:
+        random_champion = random.choice(champions)
+        all_voice_files = [f for f in os.listdir(f'voicelines_audio/{random_champion}') if os.path.isfile(os.path.join(f'voicelines_audio/{random_champion}', f))]
+        random_voice_file = random.choice(all_voice_files)
+        playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
 
-    while guess != random_champion:
-        print('Wrong!')
-        if i == 4:
-            print(f'Hint: The champions name starts with {hint}')
-            playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
-            i = 0
-        else:
-            i += 1
-        guess = input('Try again: ')
+        guess = input('Which champion is this voice line from? ')
+        i = 0
+        hint = random_champion[0]
 
-    if guess == random_champion:
-        print('Correct!\n')
+        while guess != random_champion:
+            print('Wrong!')
+            if i == 4:
+                print(f'Hint: The champions name starts with {hint}')
+                playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
+                i = 0
+            else:
+                i += 1
+            guess = input('Try again: ')
+
+        if guess == random_champion:
+            print('Correct!\n')
+
+    elif on_or_off == 0:
+        print('Coming soon! Please select "Offline" (1) for now.')
+        guess_the_voiceline_sound(champions)
+
 
 def guess_vgs_keys():
     answer = input('"legacy" VGS or "new" VGS? ')
