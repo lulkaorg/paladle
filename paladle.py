@@ -13,9 +13,9 @@ def main():
 
     guess_the_ult_voiceline_text(champions)
     guess_the_voiceline_sound(champions)
-    #guess_the_ability(champions)
+    guess_the_ability(champions)
     guess_vgs_keys()
-    #guess_talent(champions)
+    guess_talent(champions)
 
 def guess_the_ult_voiceline_text(champions):
     random_champion = random.choice(champions)
@@ -41,7 +41,7 @@ def guess_the_ult_voiceline_text(champions):
         print('Correct!\n')
 
 def guess_the_ability(champions):
-    random_champion = random.choice(champions)
+    random_champion = random.choice(['Androxus', 'Maeve', 'Ying'])
     champ_file = open(f'ability_names/{random_champion}', 'r')
     content = champ_file.read().splitlines()
     random_line = random.choice(content)
@@ -183,7 +183,7 @@ def guess_vgs_keys():
 
 
 def guess_talent(champions):
-    random_champion = random.choice(champions)
+    random_champion = random.choice(['Androxus', 'Maeve', 'Ying'])
     random_champion_talents_dir = f'talents/{random_champion}'
 
     # This basically opens the directory and gets all the names of the files in there
