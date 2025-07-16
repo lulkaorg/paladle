@@ -1,8 +1,8 @@
 import random
 import os
 from betterplaysound import playsound
-import requests
-import tempfile
+#import requests
+#import tempfile
 
 def main():
     champions = ['Androxus', 'Ash', 'Atlas', 'Azaan', 'Barik', 'Betty', 'Bomb Bing', 'Buck', 'Caspian', 'Cassie', 'Corvus', 'Dredge', 'Drogoz', 'Evie',
