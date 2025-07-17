@@ -1,0 +1,6 @@
+include README.md
+include LICENSE
+include ability_names *
+recursive-include talents *
+recursive-include voicelines_audio *
+include voicelines_text *
