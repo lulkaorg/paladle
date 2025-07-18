@@ -56,3 +56,4 @@ env/
 # Local configuration files
 *.local
 
+pyproject.toml
