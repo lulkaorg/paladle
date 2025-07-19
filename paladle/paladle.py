@@ -3,6 +3,7 @@ import os
 from betterplaysound import playsound
 #import requests
 #import tempfile
+from importlib.resources import files, as_file
 
 def main():
     champions = ['Androxus', 'Ash', 'Atlas', 'Azaan', 'Barik', 'Betty', 'Bomb Bing', 'Buck', 'Caspian', 'Cassie', 'Corvus', 'Dredge', 'Drogoz', 'Evie',
@@ -19,10 +20,15 @@ def main():
 
 def guess_the_ult_voiceline_text(champions):
     random_champion = random.choice(champions)
-    champ_file = open(f'voicelines_text/{random_champion}', 'r')
-    content = champ_file.read()
-    print(content)
-    champ_file.close()
+    #champ_file = open(f'voicelines_text/{random_champion}', 'r')
+    #content = champ_file.read()
+    #print(content)
+    #champ_file.close()
+    champ_file = files('paladle.voicelines_text').joinpath(random_champion)
+    with open(champ_file, 'r', encoding='utf-8') as f:
+        content = f.read()
+        print(content)
+
 
     guess = input('Which champions ult voice lines are these? ')
     i = 0
@@ -42,11 +48,16 @@ def guess_the_ult_voiceline_text(champions):
 
 def guess_the_ability(champions):
     random_champion = random.choice(['Androxus', 'Maeve', 'Ying'])
-    champ_file = open(f'ability_names/{random_champion}', 'r')
-    content = champ_file.read().splitlines()
-    random_line = random.choice(content)
-    print(random_line)
-    champ_file.close()
+    #champ_file = open(f'ability_names/{random_champion}', 'r')
+    #content = champ_file.read().splitlines()
+    #random_line = random.choice(content)
+    #print(random_line)
+    #champ_file.close()
+    champ_file = files('paladle.ability_names').joinpath(random_champion)
+    with open(champ_file, 'r', encoding='utf-8') as f:
+        content = f.read().splitlines()
+        random_line = random.choice(content)
+        print(random_line)
 
     guess = input('Which champion is this ability/weapon name from? ')
     i = 0
@@ -65,13 +76,23 @@ def guess_the_ability(champions):
         print('Correct!\n')
 
 def guess_the_voiceline_sound(champions):
-    on_or_off = int(input('Online(0) or Offline(1)? '))
+    on_or_off = int(input('Guess the Champion by a voice line.\nPlay the audio file from an online source or offline?\n'
+                          'Online(0) or Offline(1): '))
 
     if on_or_off == 1:
         random_champion = random.choice(champions)
-        all_voice_files = [f for f in os.listdir(f'voicelines_audio/{random_champion}') if os.path.isfile(os.path.join(f'voicelines_audio/{random_champion}', f))]
-        random_voice_file = random.choice(all_voice_files)
-        playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
+        #all_voice_files = [f for f in os.listdir(f'voicelines_audio/{random_champion}') if os.path.isfile(os.path.join(f'voicelines_audio/{random_champion}', f))]
+        #random_voice_file = random.choice(all_voice_files)
+        #playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
+        all_voice_files = files('paladle.voicelines_audio').joinpath(random_champion)
+        with as_file(all_voice_files) as dir_path:
+            all_voice_files = [
+                f for f in os.listdir(dir_path)
+                if os.path.isfile(dir_path / f)
+            ]
+            random_voice_file = random.choice(all_voice_files)
+            full_path = dir_path / random_voice_file
+            playsound(str(full_path))
 
         guess = input('Which champion is this voice line from? ')
         i = 0
@@ -81,7 +102,8 @@ def guess_the_voiceline_sound(champions):
             print('Wrong!')
             if i == 4:
                 print(f'Hint: The champions name starts with {hint}')
-                playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
+                #playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
+                playsound(str(full_path))
                 i = 0
             else:
                 i += 1
@@ -92,6 +114,10 @@ def guess_the_voiceline_sound(champions):
 
     elif on_or_off == 0:
         print('Coming soon! Please select "Offline" (1) for now.')
+        guess_the_voiceline_sound(champions)
+
+    else:
+        print('Invalid input. Enter "0" for online or "1" for offline.')
         guess_the_voiceline_sound(champions)
 
 
@@ -184,19 +210,30 @@ def guess_vgs_keys():
 
 def guess_talent(champions):
     random_champion = random.choice(['Androxus', 'Maeve', 'Ying'])
-    random_champion_talents_dir = f'talents/{random_champion}'
+    random_champion_talents_dir = files('paladle.talents').joinpath(random_champion)
 
     # This basically opens the directory and gets all the names of the files in there
-    talent_files = [f for f in os.listdir(random_champion_talents_dir) if os.path.isfile(os.path.join(random_champion_talents_dir, f))]
+    #talent_files = [f for f in os.listdir(random_champion_talents_dir) if os.path.isfile(os.path.join(random_champion_talents_dir, f))]
 
     # This selects a random file from the talent files
-    random_talent_file = random.choice(talent_files)
+    #random_talent_file = random.choice(talent_files)
 
     # This opens the randomly selected file and reads the contents
-    file_path = os.path.join(random_champion_talents_dir, random_talent_file)
-    with open(file_path, 'r') as file:
-        talent_desc = file.read()
-        print(talent_desc)
+    #file_path = os.path.join(random_champion_talents_dir, random_talent_file)
+    #with open(file_path, 'r') as file:
+    #    talent_desc = file.read()
+    #    print(talent_desc)
+    with as_file(random_champion_talents_dir) as dir_path:
+        all_talent_files = [
+            f for f in os.listdir(dir_path)
+            if os.path.isfile(dir_path / f)
+        ]
+        random_talent_file = random.choice(all_talent_files)
+        full_path = dir_path / random_talent_file
+
+        with open(full_path, 'r') as file:
+            talent_desc = file.read()
+            print(talent_desc)
 
     guess = input('Which talent does this description belong to? ')
     while guess != random_talent_file:

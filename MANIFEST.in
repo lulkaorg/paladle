@@ -1,6 +1,6 @@
 include README.md
 include LICENSE
-include paladle/ability_names *
+recursive-include paladle/ability_names *
 recursive-include paladle/talents *
 recursive-include paladle/voicelines_audio *
-include paladle/voicelines_text *
+recursive-include paladle/voicelines_text *
