@@ -37,5 +37,8 @@ __Using pipx__
 - Then follow the instructions on screen to add it to the PATH environment variable, to be able to run paladle from everywhere
 - Now you can just type `paladle` to run it from everywhere
 
+## Uninstall
+`pipx uninstall paladle`
+
 ## Disclaimer
 All of the audio files of the champions belong to Hi-Rez Studios.
