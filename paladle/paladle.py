@@ -1,9 +1,14 @@
 import random
 import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 from betterplaysound import playsound
 #import requests
 #import tempfile
 from importlib.resources import files, as_file
+from colorama import init as colorama_init
+from colorama import Fore
+from colorama import Style
+
 
 def main():
     champions = ['Androxus', 'Ash', 'Atlas', 'Azaan', 'Barik', 'Betty', 'Bomb Bing', 'Buck', 'Caspian', 'Cassie', 'Corvus', 'Dredge', 'Drogoz', 'Evie',
@@ -11,6 +16,7 @@ def main():
                  'Maeve', 'Makoa', "Mal'Damba", 'Moji', 'Nyx', 'Octavia', 'Omen', 'Pip', 'Raum', 'Rei', 'Ruckus', 'Saati', 'Seris', 'Sha Lin', 'Skye', 'Strix',
                  'Talus', 'Terminus', 'Tiberius', 'Torvald', 'Tyra', 'VII', 'Vatu', 'Viktor', 'Vivian', 'Vora', 'Willo', 'Yagorath', 'Ying', 'Zhin']
 
+    print(f'Welcome to {Fore.CYAN}Paladle!{Style.RESET_ALL}\n')
 
     guess_the_ult_voiceline_text(champions)
     guess_the_voiceline_sound(champions)
@@ -35,7 +41,7 @@ def guess_the_ult_voiceline_text(champions):
     hint = random_champion[0]
 
     while guess != random_champion:
-        print('Wrong!')
+        print(f'{Fore.RED}Wrong!{Style.RESET_ALL}')
         if i == 4:
             print(f'Hint: The champions name starts with {hint}')
             i = 0
@@ -44,7 +50,7 @@ def guess_the_ult_voiceline_text(champions):
         guess = input('Try again: ')
 
     if guess == random_champion:
-        print('Correct!\n')
+        print(f'{Fore.GREEN}Correct!{Style.RESET_ALL}\n')
 
 def guess_the_ability(champions):
     random_champion = random.choice(['Androxus', 'Maeve', 'Ying'])
@@ -64,7 +70,7 @@ def guess_the_ability(champions):
     hint = random_champion[0]
 
     while guess != random_champion:
-        print('Wrong!')
+        print(f'{Fore.RED}Wrong!{Style.RESET_ALL}')
         if i == 4:
             print(f'Hint: The champions name starts with {hint}')
             i = 0
@@ -73,7 +79,7 @@ def guess_the_ability(champions):
         guess = input('Try again: ')
 
     if guess == random_champion:
-        print('Correct!\n')
+        print(f'{Fore.GREEN}Correct!{Style.RESET_ALL}\n')
 
 def guess_the_voiceline_sound(champions):
     on_or_off = int(input('Guess the Champion by a voice line.\nPlay the audio file from an online source or offline?\n'
@@ -99,7 +105,7 @@ def guess_the_voiceline_sound(champions):
         hint = random_champion[0]
 
         while guess != random_champion:
-            print('Wrong!')
+            print(f'{Fore.RED}Wrong!{Style.RESET_ALL}')
             if i == 4:
                 print(f'Hint: The champions name starts with {hint}')
                 #playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
@@ -110,14 +116,14 @@ def guess_the_voiceline_sound(champions):
             guess = input('Try again: ')
 
         if guess == random_champion:
-            print('Correct!\n')
+            print(f'{Fore.GREEN}Correct!{Style.RESET_ALL}\n')
 
     elif on_or_off == 0:
-        print('Coming soon! Please select "Offline" (1) for now.')
+        print('Coming soon! Please select "Offline" (1) for now.\n')
         guess_the_voiceline_sound(champions)
 
     else:
-        print('Invalid input. Enter "0" for online or "1" for offline.')
+        print(f'{Fore.RED}Invalid input. Enter "0" for online or "1" for offline.{Style.RESET_ALL}\n')
         guess_the_voiceline_sound(champions)
 
 
@@ -202,10 +208,10 @@ def guess_vgs_keys():
         guess = input('What is the VGS hotkey combination for this VGS voice line? ')
 
         while guess not in random_vgs_voice_line:
-            guess = input('Wrong! Try again: ')
+            guess = input(f'{Fore.RED}Wrong! Try again: {Style.RESET_ALL}')
 
         if guess in random_vgs_voice_line:
-            print('Correct!\n')
+            print(f'{Fore.GREEN}Correct!{Style.RESET_ALL}\n')
 
 
 def guess_talent(champions):
@@ -237,10 +243,10 @@ def guess_talent(champions):
 
     guess = input('Which talent does this description belong to? ')
     while guess != random_talent_file:
-        guess = input('Wrong! Try again: ')
+        guess = input(f'{Fore.RED}Wrong! Try again: {Style.RESET_ALL}')
 
     if guess == random_talent_file:
-        print('Correct!\n')
+        print(f'{Fore.GREEN}Correct!{Style.RESET_ALL}\n')
 
 
 if __name__ == '__main__':
