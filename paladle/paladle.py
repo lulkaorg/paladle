@@ -2,7 +2,7 @@ import random
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 from betterplaysound import playsound
-#import requests
+import requests
 #import tempfile
 from importlib.resources import files, as_file
 from colorama import init as colorama_init
@@ -18,11 +18,33 @@ def main():
 
     print(f'Welcome to {Fore.CYAN}Paladle!{Style.RESET_ALL}\n')
 
+    vcheck()
     guess_the_ult_voiceline_text(champions)
     guess_the_voiceline_sound(champions)
     guess_the_ability(champions)
     guess_vgs_keys()
     guess_talent(champions)
+
+def vcheck():
+    v_file = files('paladle').joinpath('vcheck')
+    with open(v_file, 'r', encoding='utf-8') as f:
+        v = f.read()
+
+    remote_v_file = 'https://raw.githubusercontent.com/lulkaorg/paladle/refs/heads/main/paladle/vcheck'
+    response = requests.get(remote_v_file)
+    if response.status_code == 200:
+        remote_v = response.text
+
+    else:
+        pass
+
+
+    if v != remote_v:
+        print(f'{Fore.RED}New update for Paladle is available!\nFollow the instructions on how to update here:{Style.RESET_ALL} '
+              f'{Fore.BLUE}https://github.com/lulkaorg/paladle/tree/main?tab=readme-ov-file#updating{Style.RESET_ALL}\n')
+
+    else:
+        pass
 
 def guess_the_ult_voiceline_text(champions):
     random_champion = random.choice(champions)
