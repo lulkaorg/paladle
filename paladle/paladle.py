@@ -75,7 +75,7 @@ def guess_the_ult_voiceline_text(champions):
         print(f'{Fore.GREEN}Correct!{Style.RESET_ALL}\n')
 
 def guess_the_ability(champions):
-    random_champion = random.choice(['Androxus', 'Maeve', 'Ying'])
+    random_champion = random.choice(champions)
     #champ_file = open(f'ability_names/{random_champion}', 'r')
     #content = champ_file.read().splitlines()
     #random_line = random.choice(content)
