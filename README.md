@@ -37,6 +37,10 @@ __Using pipx__
 - Then follow the instructions on screen to add it to the PATH environment variable, to be able to run paladle from everywhere
 - Now you can just type `paladle` to run it from everywhere
 
+## Updating
+- To update Paladle, you have to reinstall it
+`pipx reinstall git+https://github.com/lulkaorg/paladle.git`
+
 ## Uninstall
 `pipx uninstall paladle`
 
