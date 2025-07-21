@@ -237,7 +237,7 @@ def guess_vgs_keys():
 
 
 def guess_talent(champions):
-    random_champion = random.choice(['Androxus', 'Maeve', 'Ying'])
+    random_champion = random.choice(champions)
     random_champion_talents_dir = files('paladle.talents').joinpath(random_champion)
 
     # This basically opens the directory and gets all the names of the files in there
