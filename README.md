@@ -9,7 +9,10 @@ Currently there are 5 different categories:
   4. Guessing the VGS input keys by the VGS command output
   5. Guessing the talent of a Champion based on the talent description
 
-There will also be more categories in the future!
+There will also be more categories in the future!  
+
+- "Betty La Bomba" has been shortened to just "Betty".  
+- Currently you have to write the apostrophe (') in Talent names etc. (for example: Rogue's Gambit, instead of Rogues Gambit). So keep that in mind! 
 
 ## Planned categories & features
 - Random trivia questions about the game
