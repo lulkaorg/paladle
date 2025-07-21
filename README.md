@@ -9,9 +9,6 @@ Currently there are 5 different categories:
   4. Guessing the VGS input keys by the VGS command output
   5. Guessing the talent of a Champion based on the talent description
 
-All Champions are currently only available in categories 1 and 2.
-More Champions will be added to categories 3 and 5 over time.
-
 There will also be more categories in the future!
 
 ## Planned categories & features
