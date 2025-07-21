@@ -36,7 +36,7 @@ __Using pipx__
 
 ## Updating
 - To update Paladle, you have to reinstall it
-`pipx reinstall git+https://github.com/lulkaorg/paladle.git`
+`pipx reinstall paladle`
 
 ## Uninstall
 `pipx uninstall paladle`
