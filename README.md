@@ -11,21 +11,21 @@ Currently there are 5 different categories:
 
 There will also be more categories in the future!  
 
+Use `paladle` with command line options to only play one selected category.  
+For example `paladle -a` to only play the "Guess the VGS key combination" category.  
+To see all available command line options, type `paladle -h`.
+
 - "Betty La Bomba" has been shortened to just "Betty".  
-- Currently you have to write the apostrophe (') in Talent names etc. (for example: Rogue's Gambit, instead of Rogues Gambit). So keep that in mind! 
+- Currently you have to write the apostrophe (') in Talent names etc. (for example: Rogue's Gambit, instead of Rogues Gambit). So keep that in mind!
 
 ## Planned categories & features
 - Random trivia questions about the game
 - Guessing the Announcer Pack based on one voice line
 - Guessing the item from the item shop
 
-- Being able to use command line options to only play one category
-
 ## Known Issues
 Currently every input is still case sensitive. This means Champion names, weapon names, ability names, and talent names have to be entered with the first letter in upper case.
 The VGS input keys in contrast have to be entered in all lower case.
-
-When the randomly selected Champion to guess is "Bomb King", the game crashes.
 
 ## Dependencies
 - [pipx](https://pipx.pypa.io/latest/installation/)
