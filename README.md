@@ -12,7 +12,7 @@ Currently there are 5 different categories:
 There will also be more categories in the future!  
 
 Use `paladle` with command line options to only play one selected category.  
-For example `paladle -a` to only play the "Guess the VGS key combination" category.  
+For example `paladle -v` to only play the "Guess the VGS key combination" category.  
 To see all available command line options, type `paladle -h`.
 
 - "Betty La Bomba" has been shortened to just "Betty".  
