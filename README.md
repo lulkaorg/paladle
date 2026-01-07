@@ -22,6 +22,7 @@ To see all available command line options, type `paladle -h`.
 - Random trivia questions about the game
 - Guessing the Announcer Pack based on one voice line
 - Guessing the item from the item shop
+- A skip feature to skip one category while playing
 
 ## Known Issues
 Currently every input is still case sensitive. This means Champion names, weapon names, ability names, and talent names have to be entered with the first letter in upper case.
@@ -29,7 +30,7 @@ The VGS input keys in contrast have to be entered in all lower case.
 
 ## Dependencies
 - [pipx](https://pipx.pypa.io/latest/installation/)
-- [Python](https://www.python.org/downloads/) 3.12 or older. When trying to use __Python 3.13__ or newer the __installation will fail!__
+- [Python](https://www.python.org/downloads/) (ideally) 3.12.3. When trying to use __Python 3.13__ or newer the __installation will fail!__
 
 ## Installation
 __Using pipx__

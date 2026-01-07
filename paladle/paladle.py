@@ -5,7 +5,6 @@ from betterplaysound import playsound
 import requests
 #import tempfile
 from importlib.resources import files, as_file
-from colorama import init as colorama_init
 from colorama import Fore
 from colorama import Style
 import argparse
@@ -13,60 +12,64 @@ import sys
 
 
 def main():
-    champions = ['Androxus', 'Ash', 'Atlas', 'Azaan', 'Barik', 'Betty', 'Bomb King', 'Buck', 'Caspian', 'Cassie', 'Corvus', 'Dredge', 'Drogoz', 'Evie',
-                 'Fernando', 'Furia', 'Grohk', 'Grover', 'Imani', 'Inara', 'Io', 'Jenos', 'Kasumi', 'Khan', 'Kinessa', 'Koga', 'Lex', 'Lian', 'Lillith',
-                 'Maeve', 'Makoa', "Mal'Damba", 'Moji', 'Nyx', 'Octavia', 'Omen', 'Pip', 'Raum', 'Rei', 'Ruckus', 'Saati', 'Seris', 'Sha Lin', 'Skye', 'Strix',
-                 'Talus', 'Terminus', 'Tiberius', 'Torvald', 'Tyra', 'VII', 'Vatu', 'Viktor', 'Vivian', 'Vora', 'Willo', 'Yagorath', 'Ying', 'Zhin']
+    try:
+        champions = ['Androxus', 'Ash', 'Atlas', 'Azaan', 'Barik', 'Betty', 'Bomb King', 'Buck', 'Caspian', 'Cassie', 'Corvus', 'Dredge', 'Drogoz', 'Evie',
+                     'Fernando', 'Furia', 'Grohk', 'Grover', 'Imani', 'Inara', 'Io', 'Jenos', 'Kasumi', 'Khan', 'Kinessa', 'Koga', 'Lex', 'Lian', 'Lillith',
+                     'Maeve', 'Makoa', "Mal'Damba", 'Moji', 'Nyx', 'Octavia', 'Omen', 'Pip', 'Raum', 'Rei', 'Ruckus', 'Saati', 'Seris', 'Sha Lin', 'Skye', 'Strix',
+                     'Talus', 'Terminus', 'Tiberius', 'Torvald', 'Tyra', 'VII', 'Vatu', 'Viktor', 'Vivian', 'Vora', 'Willo', 'Yagorath', 'Ying', 'Zhin']
 
 
-    parser = argparse.ArgumentParser(description='Modify how you play Paladle')
-    parser.add_argument('-u', action='store_true', help='Lets you only play the Ult Voice Line (text) category')
-    parser.add_argument('-q', action='store_true', help='Lets you only play the Voice Line (audio) category')
-    parser.add_argument('-a', action='store_true', help='Lets you only play the Ability category')
-    parser.add_argument('-v', action='store_true', help='Lets you only play the VGS category')
-    parser.add_argument('-t', action='store_true', help='Lets you only play the Talent category')
-    parser.add_argument('-l', action='store_true', help='Lets you loop the game without having to start it manually again. '
-                                                        'Use Ctrl + c to exit out of the game.') #May be combined with one other command line option. e.g. --la
+        parser = argparse.ArgumentParser(description='Modify how you play Paladle')
+        parser.add_argument('-u', action='store_true', help='Lets you only play the Ult Voice Line (text) category')
+        parser.add_argument('-q', action='store_true', help='Lets you only play the Voice Line (audio) category')
+        parser.add_argument('-a', action='store_true', help='Lets you only play the Ability category')
+        parser.add_argument('-v', action='store_true', help='Lets you only play the VGS category')
+        parser.add_argument('-t', action='store_true', help='Lets you only play the Talent category')
+        parser.add_argument('-l', action='store_true', help='Lets you loop the game without having to start it manually again. '
+                                                            'Use Ctrl + c to exit out of the game.') #May be combined with one other command line option. e.g. --la
 
-    args = parser.parse_args()
-    argused = True
+        args = parser.parse_args()
+        argused = True
 
-    if args.u:
+        if args.u:
+            guess_the_ult_voiceline_text(champions, argused)
+        elif args.q:
+            guess_the_voiceline_sound(champions, argused)
+        elif args.a:
+            guess_the_ability(champions, argused)
+        elif args.v:
+            guess_vgs_keys(argused)
+        elif args.t:
+            guess_talent(champions, argused)
+        else:
+            pass
+
+        '''
+        if loopcheck == True:
+            pass
+        else:
+        '''
+        print(f'Welcome to {Fore.CYAN}Paladle!{Style.RESET_ALL}\n')
+
+        argused = False
+        vcheck()
         guess_the_ult_voiceline_text(champions, argused)
-    elif args.q:
         guess_the_voiceline_sound(champions, argused)
-    elif args.a:
         guess_the_ability(champions, argused)
-    elif args.v:
         guess_vgs_keys(argused)
-    elif args.t:
-        guess_talent(champions, argused)
-    else:
-        pass
+        if args.l:
+            loop = True
+            guess_talent(champions, argused, loop)
+        else:
+            loop = False
+            guess_talent(champions, argused, loop)
 
-    '''
-    if loopcheck == True:
-        pass
-    else:
-    '''
-    print(f'Welcome to {Fore.CYAN}Paladle!{Style.RESET_ALL}\n')
-
-    argused = False
-    vcheck()
-    guess_the_ult_voiceline_text(champions, argused)
-    guess_the_voiceline_sound(champions, argused)
-    guess_the_ability(champions, argused)
-    guess_vgs_keys(argused)
-    if args.l:
-        loop = True
-        guess_talent(champions, argused, loop)
-    else:
-        loop = False
-        guess_talent(champions, argused, loop)
+    except KeyboardInterrupt:
+        print(f'\n{Fore.CYAN}Goodbye!{Style.RESET_ALL}')
 
 def vcheck():
     v_file = files('paladle').joinpath('vcheck')
-    with open(v_file, 'r', encoding='utf-8') as f:
+    with open(v_file, 'r') as f:
         v = f.read()
 
     remote_v_file = 'https://raw.githubusercontent.com/lulkaorg/paladle/refs/heads/main/paladle/vcheck'
@@ -79,8 +82,8 @@ def vcheck():
 
 
     if v != remote_v:
-        print(f'{Fore.RED}New update for Paladle is available!\nFollow the instructions on how to update here:{Style.RESET_ALL} '
-              f'{Fore.BLUE}https://github.com/lulkaorg/paladle/tree/main?tab=readme-ov-file#updating{Style.RESET_ALL}\n')
+        print(f'{Fore.RED}A new update for Paladle is available! Hit Ctrl + c to exit Paladle and run the following command to update it:{Style.RESET_ALL}\n'
+              f'pipx reinstall paladle')
 
     else:
         pass
@@ -150,66 +153,71 @@ def guess_the_ability(champions, argused):
             sys.exit()
 
 def guess_the_voiceline_sound(champions, argused):
-    on_or_off = int(input('Guess the Champion by a voice line.\nPlay the audio file from an online source or offline?\n'
-                          'Online(0) or Offline(1): '))
+    try:
+        on_or_off = int(input('Guess the Champion by a voice line.\nPlay the audio file from an online source or offline?\n'
+                              'Online(0) or Offline(1): '))
 
-    if on_or_off == 1:
-        random_champion = random.choice(champions)
-        #all_voice_files = [f for f in os.listdir(f'voicelines_audio/{random_champion}') if os.path.isfile(os.path.join(f'voicelines_audio/{random_champion}', f))]
-        #random_voice_file = random.choice(all_voice_files)
-        #playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
-        all_voice_files = files('paladle.voicelines_audio').joinpath(random_champion)
-        with as_file(all_voice_files) as dir_path:
-            all_voice_files = [
-                f for f in os.listdir(dir_path)
-                if os.path.isfile(dir_path / f)
-            ]
-            random_voice_file = random.choice(all_voice_files)
-            full_path = dir_path / random_voice_file
-            playsound(str(full_path))
-
-        guess = input('Which champion is this voice line from? ')
-        i = 0
-        hint = random_champion[0]
-
-        while guess != random_champion:
-            print(f'{Fore.RED}Wrong!{Style.RESET_ALL}')
-            if i == 4:
-                print(f'Hint: The champions name starts with {hint}')
-                #playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
+        if on_or_off == 1:
+            random_champion = random.choice(champions)
+            #all_voice_files = [f for f in os.listdir(f'voicelines_audio/{random_champion}') if os.path.isfile(os.path.join(f'voicelines_audio/{random_champion}', f))]
+            #random_voice_file = random.choice(all_voice_files)
+            #playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
+            all_voice_files = files('paladle.voicelines_audio').joinpath(random_champion)
+            with as_file(all_voice_files) as dir_path:
+                all_voice_files = [
+                    f for f in os.listdir(dir_path)
+                    if os.path.isfile(dir_path / f)
+                ]
+                random_voice_file = random.choice(all_voice_files)
+                full_path = dir_path / random_voice_file
                 playsound(str(full_path))
-                i = 0
-            else:
-                i += 1
-            guess = input('Try again: ')
 
-        if guess == random_champion:
-            print(f'{Fore.GREEN}Correct!{Style.RESET_ALL}\n')
+            guess = input('Which champion is this voice line from? ')
+            i = 0
+            hint = random_champion[0]
 
-            if argused == True:
-                sys.exit()
+            while guess != random_champion:
+                print(f'{Fore.RED}Wrong!{Style.RESET_ALL}')
+                if i == 4:
+                    print(f'Hint: The champions name starts with {hint}')
+                    #playsound(f'voicelines_audio/{random_champion}/{random_voice_file}')
+                    playsound(str(full_path))
+                    i = 0
+                else:
+                    i += 1
+                guess = input('Try again: ')
 
-    elif on_or_off == 0:
-        print(f'{Fore.RED}Coming soon! Please select "Offline" (1) for now.{Style.RESET_ALL}\n')
+            if guess == random_champion:
+                print(f'{Fore.GREEN}Correct!{Style.RESET_ALL}\n')
 
-        if argused == False:
-            argused = False
-            guess_the_voiceline_sound(champions, argused)
+                if argused == True:
+                    sys.exit()
 
-        elif argused == True:
-            argused = True
-            guess_the_voiceline_sound(champions, argused)
+        elif on_or_off == 0:
+            print(f'{Fore.RED}Coming soon! Please select "Offline" (1) for now.{Style.RESET_ALL}\n')
 
-    else:
-        print(f'{Fore.RED}Invalid input. Enter "0" for online or "1" for offline.{Style.RESET_ALL}\n')
+            if argused == False:
+                argused = False
+                guess_the_voiceline_sound(champions, argused)
 
-        if argused == False:
-            argused = False
-            guess_the_voiceline_sound(champions, argused)
+            elif argused == True:
+                argused = True
+                guess_the_voiceline_sound(champions, argused)
 
-        elif argused == True:
-            argused = True
-            guess_the_voiceline_sound(champions, argused)
+        else:
+            print(f'{Fore.RED}Invalid input. Enter "0" for online or "1" for offline.{Style.RESET_ALL}\n')
+
+            if argused == False:
+                argused = False
+                guess_the_voiceline_sound(champions, argused)
+
+            elif argused == True:
+                argused = True
+                guess_the_voiceline_sound(champions, argused)
+
+    except ValueError:
+        print(f'{Fore.RED}Invalid input. The input character was no number.{Style.RESET_ALL}\n')
+        guess_the_voiceline_sound(champions, argused)
 
 
 def guess_vgs_keys(argused):
@@ -300,6 +308,10 @@ def guess_vgs_keys(argused):
 
             if argused == True:
                 sys.exit()
+
+    else:
+        print(f'{Fore.RED}Invalid input.{Style.RESET_ALL}\n')
+        guess_vgs_keys(argused)
 
 
 def guess_talent(champions, argused, loop):
