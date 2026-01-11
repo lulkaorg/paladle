@@ -55,3 +55,5 @@ env/
 
 # Local configuration files
 *.local
+
+paladle.spec

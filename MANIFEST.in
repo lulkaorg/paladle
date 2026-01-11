@@ -5,3 +5,4 @@ recursive-include paladle/talents *
 recursive-include paladle/voicelines_audio *
 recursive-include paladle/voicelines_text *
 include paladle/vcheck
+include paladle/trivia/trivia_questions

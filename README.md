@@ -7,7 +7,8 @@ Currently there are 5 different categories:
   2. Guessing the Champion by one of their voice lines (audio)
   3. Guessing the Champion by the name of their weapon / one ability
   4. Guessing the VGS input keys by the VGS command output
-  5. Guessing the talent of a Champion based on the talent description
+  5. Guessing a random trivia question
+  6. Guessing the talent of a Champion based on the talent description
 
 There will also be more categories in the future!  
 
@@ -15,14 +16,14 @@ Use `paladle` with command line options to only play one selected category.
 For example `paladle -v` to only play the "Guess the VGS key combination" category.  
 To see all available command line options, type `paladle -h`.
 
+To skip a category, type "skip" and hit enter at the point where you would have guess the correct answer.
+
 - "Betty La Bomba" has been shortened to just "Betty".  
 - Currently you have to write the apostrophe (') in Talent names etc. (for example: Rogue's Gambit, instead of Rogues Gambit). So keep that in mind!
 
 ## Planned categories & features
-- Random trivia questions about the game
 - Guessing the Announcer Pack based on one voice line
 - Guessing the item from the item shop
-- A skip feature to skip one category while playing
 
 ## Known Issues
 Currently every input is still case sensitive. This means Champion names, weapon names, ability names, and talent names have to be entered with the first letter in upper case.

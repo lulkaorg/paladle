@@ -25,6 +25,7 @@ def main():
         parser.add_argument('-a', action='store_true', help='Lets you only play the Ability category')
         parser.add_argument('-v', action='store_true', help='Lets you only play the VGS category')
         parser.add_argument('-t', action='store_true', help='Lets you only play the Talent category')
+        parser.add_argument('-T', action='store_true', help='Lets you only play the Trivia category')
         parser.add_argument('-l', action='store_true', help='Lets you loop the game without having to start it manually again. '
                                                             'Use Ctrl + c to exit out of the game.') #May be combined with one other command line option. e.g. --la
 
@@ -41,6 +42,8 @@ def main():
             guess_vgs_keys(argused)
         elif args.t:
             guess_talent(champions, argused)
+        elif args.T:
+            trivia(argused)
         else:
             pass
 
@@ -57,6 +60,7 @@ def main():
         guess_the_voiceline_sound(champions, argused)
         guess_the_ability(champions, argused)
         guess_vgs_keys(argused)
+        trivia(argused)
         if args.l:
             loop = True
             guess_talent(champions, argused, loop)
@@ -105,6 +109,10 @@ def guess_the_ult_voiceline_text(champions, argused):
     i = 0
     hint = random_champion[0]
 
+    if guess == 'skip':
+        print('Question skipped\n')
+        return
+
     while guess != random_champion:
         print(f'{Fore.RED}Wrong!{Style.RESET_ALL}')
         if i == 4:
@@ -136,6 +144,10 @@ def guess_the_ability(champions, argused):
     guess = input('Which champion is this ability/weapon name from? ')
     i = 0
     hint = random_champion[0]
+
+    if guess == 'skip':
+        print('Question skipped\n')
+        return
 
     while guess != random_champion:
         print(f'{Fore.RED}Wrong!{Style.RESET_ALL}')
@@ -175,6 +187,10 @@ def guess_the_voiceline_sound(champions, argused):
             guess = input('Which champion is this voice line from? ')
             i = 0
             hint = random_champion[0]
+
+            if guess == 'skip':
+                print('Question skipped\n')
+                return
 
             while guess != random_champion:
                 print(f'{Fore.RED}Wrong!{Style.RESET_ALL}')
@@ -300,6 +316,10 @@ def guess_vgs_keys(argused):
 
         guess = input('What is the VGS hotkey combination for this VGS voice line? ')
 
+        if guess == 'skip':
+            print('Question skipped\n')
+            return
+
         while guess not in random_vgs_voice_line:
             guess = input(f'{Fore.RED}Wrong! Try again: {Style.RESET_ALL}')
 
@@ -342,6 +362,11 @@ def guess_talent(champions, argused, loop):
             print(talent_desc)
 
     guess = input('Which talent does this description belong to? ')
+
+    if guess == 'skip':
+        print('Question skipped\n')
+        return
+
     while guess != random_talent_file:
         guess = input(f'{Fore.RED}Wrong! Try again: {Style.RESET_ALL}')
 
@@ -357,6 +382,57 @@ def guess_talent(champions, argused, loop):
 
     elif loop == False:
         pass
+
+
+def trivia(argused):
+    trivia_questions_file = files('paladle.trivia').joinpath('trivia_questions')
+
+    with open(trivia_questions_file, 'r', encoding='utf-8') as file:
+        line_number_list = []
+        content_list = []
+
+        for i, line in enumerate(file):
+            line_number_list.append(i)
+            content_list.append(line)
+
+        random_line_number = random.choice(line_number_list)
+        #print(f'random line number {random_line_number}')
+
+        if random_line_number % 2 == 0:
+            random_question = content_list[random_line_number]
+            guess = input(f'{random_question}\nWhat is the correct answer for this question? ')
+            answer = content_list[random_line_number+1].strip()
+
+            if guess == 'skip':
+                print('Question skipped\n')
+                return
+
+            while guess != answer:
+                guess = input(f'{Fore.RED}Wrong! Try again: {Style.RESET_ALL}')
+
+            if guess == answer:
+                print(f'{Fore.GREEN}Correct!{Style.RESET_ALL}\n')
+
+                if argused == True:
+                    sys.exit()
+
+        else:
+            random_question = content_list[random_line_number-1]
+            guess = input(f'{random_question}\nWhat is the correct answer for this question? ')
+            answer = content_list[random_line_number].strip()
+
+            if guess == 'skip':
+                print('Question skipped\n')
+                return
+
+            while guess != answer:
+                guess = input(f'{Fore.RED}Wrong! Try again: {Style.RESET_ALL}')
+
+            if guess == answer:
+                print(f'{Fore.GREEN}Correct!{Style.RESET_ALL}\n')
+
+                if argused == True:
+                    sys.exit()
 
 
 if __name__ == '__main__':
