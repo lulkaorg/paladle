@@ -2,7 +2,7 @@
 Paladle is a command line based quiz game for the video game "Paladins".
 
 ## Overview
-Currently there are 5 different categories:
+Currently there are 6 different categories:
   1. Guessing the Champion by their ult voice lines (text)
   2. Guessing the Champion by one of their voice lines (audio)
   3. Guessing the Champion by the name of their weapon / one ability
