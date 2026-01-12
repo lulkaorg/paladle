@@ -363,7 +363,10 @@ def guess_talent(champions, argused, loop):
 
     guess = input('Which talent does this description belong to? ')
 
-    if guess == 'skip':
+    if guess == 'skip' and loop == True:
+        print('Question skipped\n')
+        main()
+    elif guess == 'skip':
         print('Question skipped\n')
         return
 
