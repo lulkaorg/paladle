@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> Paladle was moved to Codeberg: https://codeberg.org/lulkaorg/paladle  
+> Go there to find the newest updates on the project!
+
+
 # Paladle
 Paladle is a command line based quiz game for the video game "Paladins".
 
